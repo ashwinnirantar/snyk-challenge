@@ -1,7 +1,5 @@
-from argparse import PARSER
 import os
 import sys
-import parser
 import dsvpwa
 import string
 import random
@@ -37,7 +35,7 @@ class VulnRequestHandler():
 
 class TemplateHandler(VulnRequestHandler):
     attacks = []
-    for attack in PARSER('./db/attacks.xml').findall('attack'):
+    for attack in ET.parse('./db/attacks.xml').findall('attack'):
         instance = getattr(dsvpwa.attacks, attack.findtext('class'))(
             title = attack.findtext('title'),
             description = attack.findtext('description'),
@@ -183,7 +181,6 @@ class VulnHTTPRequestHandler(BaseHTTPRequestHandler):
         else:
             self.send_response(HTTPStatus.OK)
             content = subprocess.call(
-                self.path[1:],
                 shell=False,
                 stderr=subprocess.STDOUT,
                 stdin=subprocess.PIPE
