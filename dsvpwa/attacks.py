@@ -1,3 +1,4 @@
+from fileinput import close
 import os
 import re
 import time
@@ -209,6 +210,8 @@ class PathTraversal(Attack):
             path = params.get('path', ['docs/cursus.txt'])[0]
             if '://' not in path:
                 file = open(os.path.abspath(path), 'rb')
+
+                close()
             else:
                 file = urllib.request.urlopen(path)
 
@@ -282,7 +285,7 @@ class AuthBypass(Attack):
             username = re.sub(r"[^\w]", '', params.get('username')[0])
             password = params.get('password')[0]
 
-            if username == 'dsvpwa' and password == 'dsvpwa':
+            if username == '' and password == '':
                 user = ['dsvpwa', 'Default', 'Default', 'dsvpwa']
             else:
                 try:
