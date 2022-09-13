@@ -6,5 +6,5 @@ function process(data)
 var index = document.location.hash.indexOf('lang=');
 if (index != -1)
 {
-    document.write('<div style=\"position: absolute; top: 5px; right: 5px;\">Chosen language: <b>' + decodeURIComponent(document.location.hash.substring(index + 5)) + '</b></div>');
+    document.write(dompurify.sanitize('<div style=\"position: absolute; top: 5px; right: 5px;\">Chosen language: <b>' + decodeURIComponent(document.location.hash.substring(index + 5)) + '</b></div>'));
 }
