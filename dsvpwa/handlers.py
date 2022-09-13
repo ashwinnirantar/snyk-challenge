@@ -141,7 +141,7 @@ class VulnHTTPRequestHandler(BaseHTTPRequestHandler):
     cookie = http.cookies.SimpleCookie()
 
     routes = {'/' : {'template' : 'index.html'}}
-    for attack in ET.parse('./db/attacks.xml').findall('attack'):
+    for attack in parse('./db/attacks.xml').findall('attack'):
         routes[attack.findtext('route')] = {
             'template' : attack.findtext('template')
         }
