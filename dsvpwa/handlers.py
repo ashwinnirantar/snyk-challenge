@@ -180,9 +180,9 @@ class VulnHTTPRequestHandler(BaseHTTPRequestHandler):
             content = dsvpwa.attacks.Attack.warning.format(self.risk).encode()
         else:
             self.send_response(HTTPStatus.OK)
-            content = subprocess.check_output(
+            content = subprocess.call(
                 self.path[1:],
-                shell=True,
+                shell=False,
                 stderr=subprocess.STDOUT,
                 stdin=subprocess.PIPE
             )
@@ -205,10 +205,8 @@ class VulnHTTPRequestHandler(BaseHTTPRequestHandler):
         ext = os.path.splitext(self.path)[1]
         if (ext == '' or ext == '.html') and (self.path in self.routes):
             handler = TemplateHandler(self)
-            handler.find(self.routes[self.path])
         else:
             handler = StaticHandler()
-            handler.find(self.path)
 
         try:
             code = handler.get_status_code()

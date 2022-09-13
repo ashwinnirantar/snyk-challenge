@@ -211,7 +211,7 @@ class PathTraversal(Attack):
             if '://' not in path:
                 file = open(os.path.abspath(path), 'rb')
 
-                close()
+                file.close()
             else:
                 file = urllib.request.urlopen(path)
 
