@@ -35,7 +35,7 @@ class VulnRequestHandler():
 
 class TemplateHandler(VulnRequestHandler):
     attacks = []
-    for attack in ET.parse('./db/attacks.xml').findall('attack'):
+    for attack in parse('./db/attacks.xml').findall('attack'):
         instance = getattr(dsvpwa.attacks, attack.findtext('class'))(
             title = attack.findtext('title'),
             description = attack.findtext('description'),
